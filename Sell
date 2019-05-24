@@ -1,0 +1,47 @@
+class Search_by_map_layout:
+    
+    def __init__(self):
+        pass
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+class Buy_by_amount_of_money:
+
+    def __init__(self):
+        pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Routing_to_the_nearest_factory_store:
+    
+    def __init__(self):
+        pass
