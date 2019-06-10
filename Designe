@@ -76,20 +76,23 @@ static void strassen(int n,int A[][],int B[][],int C[][]){
         int B22[][]=new int[size][size];
         int M1[][]=new int[size][size],M2[][]=new int[size][size],M3[][]=new int[size][size]
                 ,M4[][]=new int[size][size],M5[][]=new int[size][size],M6[][]=new int[size][size]
-                ,M7[][]=new int[size][size],C00[][]=new int[n][n],C01[][]=new int[n][n],
-                C10[][]=new int[n][n],C11[][]=new int[n][n],i,j;
-            for(i=0 ; i<n/2 ; i++)
-                for(j=0 ; j<n/2 ; j++){
+                ,M7[][]=new int[size][size],C00[][]=new int[size][size],C01[][]=new int[size][size],
+                C10[][]=new int[size][size],C11[][]=new int[size][size],i,j;
+        if(n%2==0)
+            for(i=0 ; i<size ; i++)
+                for(j=0 ; j<size ; j++){
                     A11[i][j]=A[i][j];
-                    A12[i][j]=A[i][j+n/2];
+                    A12[i][j]=A[i][j+size];
                     B11[i][j]=B[i][j];
-                    B12[i][j]=B[i][j+n/2];
-                    A21[i][j]=A[i+n/2][j];
-                    A22[i][j]=A[i+n/2][j+n/2];
-                    B21[i][j]=B[i+n/2][j];
-                    B22[i][j]=B[i+n/2][j+n/2];
+                    B12[i][j]=B[i][j+size];
+                    A21[i][j]=A[i+size][j];
+                    A22[i][j]=A[i+size][j+size];
+                    B21[i][j]=B[i+size][j];
+                    B22[i][j]=B[i+size][j+size];
                 }
-        
+        else 
+            for(i=0; i<size ;i++)
+                for(j=0 ;j<size ; j++)
         
         
         strassen(n/2, add(n/2,A11,A22,true), add(n/2,B11,B22,true), M1);
