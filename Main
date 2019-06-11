@@ -1,57 +1,83 @@
-from numpy import *
-from PIL import Image
-import math
-import wx
-from Designe import Change_New_Carpets ,Designe_New_Carpets
-from Sell import Search_by_map_layout,Buy_by_amount_of_money,Routing_to_the_nearest_factory_store
-#""""""""""""""""""""""""""""""""""""""""""""""""""
-def main():
-    print("Welcom to our Company!:)")
-    print("Please Enter the number correspond to your work:","/n 1.Designe_Change New Carpets","/n 2.Designe_Designe New Carpets","/n 3.Sell_Search by map layout ","/n 4.Sell_Buy by amount of money","/n 5.Sell_Routing to the nearest factory store")
-    cnc=Change_New_Carpets
-    dnc=Designe_New_Carpets
-    sml=Search_by_map_layout
-    bam=Buy_by_amount_of_money
-    rnf=Routing_to_the_nearest_factory_store
-    #open image
-    im = Image.open('D:/flower.jpg', 'r')
-    im_2 = Image.open('D:/flower_2.jpg', 'r')
-    print(im.size, im_2.size)
-    # pixel picture
-    pix_arr_im = list(im.getdata())
-    pix_arr_im_2 = list(im_2.getdata())
-    red_arr_im = []
-    red_arr_im_2 = []
-    # splite red pixel
-    for p in range(0, len(pix_arr_im)):
-        red_arr_im.append(pix_arr_im[p][0])
-    for p in range(0, len(pix_arr_im_2)):
-        red_arr_im_2.append(pix_arr_im_2[p][0])
-    # unique length
-    w_im = int(min(math.log2(im.size[0]), math.log2(im.size[1])))
-    w_im_2 = int(min(math.log2(im_2.size[0]), math.log2(im_2.size[1])))
-    wide = min(w_im_2, w_im)
-    wide = 2 ** wide
-    # make matrix
-    list_modyfi_im = []
-    list_modyfi_im_2 = []
-    for i in range(0, wide * wide):
-        list_modyfi_im.append(red_arr_im[i])
-        list_modyfi_im_2.append(red_arr_im_2[i])
-    matrix_im = reshape(list_modyfi_im, (wide, wide))
-    matrix_im_2 = reshape(list_modyfi_im_2, (wide, wide))
-    print(strassen(matrix_im, matrix_im_2, wide))
-    #user input
-    user_input=input()
-    if user_input == '1':
-        cnc.strassen(matrix_im,matrix_im_2,wide)
-    if user_input == '2':
-        dnc.Matrix_neighbour(input("Please enter which of the neighboring areas are (input in the form a,b _ a,c_ ...)"))
-    if user_input == '3':
-        sml
-    if user_input == '4':
-        bam
-    if user_input == '5':
-        rnf
+package com.company;
+import java.awt.image.BufferedImage;
+import java.awt.image.PixelGrabber;
+import java.awt.image.Raster;
+import java.io.File;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.io.IOException;
+import javax.swing.*;
+public class Carpet_company {
+    public static void main(String args[]) throws IOException {
+        File fileIn = new File("C:\\Users\\Mohammad Hossein\\Pictures\\flower.jpg");
+        int [][] pix = new int[400][400];
+        try
+        {
+            BufferedImage img= ImageIO.read(fileIn);
+            Raster raster=img.getData();
+            int w=raster.getWidth(),h=raster.getHeight();
+            int pixels[][]=new int[w][h];
+            for (int x=0;x<w;x++)
+            {
+                for(int y=0;y<h;y++)
+                {
+                    pixels[x][y]=raster.getSample(x,y,0);
+                }
+            }
+            /*System.out.println(w );
+            System.out.print(h );
+            int k=0,m=0;
+            for (int i=0;i<400;i++)
+            {
+                for(int j=0;j<400;j++)
+                {
+                    pix[i][j] = pixels[k][m];
+                    m++;
+                }
+                k++;
+            }*/
+            for (int x=0;x<w;x++)
+            {
+                for(int y=0;y<h;y++)
+                {
+                    System.out.print(pixels[x][y]+" ");
+                }
+                System.out.println();
+            }
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+}
 
 
+
+/*import java.awt.Image;
+import java.awt.image.ImageObserver;
+import java.awt.image.PixelGrabber;
+
+public final class Util {
+    /**
+     * Converts a java.awt.Image into an array of pixels
+     */
+/*public static int[] convertToPixels(Image img) {
+    int width = img.getWidth(null);
+    int height = img.getHeight(null);
+    int[] pixel = new int[width * height];
+
+    PixelGrabber pg = new PixelGrabber(img, 0, 0, width, height, pixel, 0, width);
+    try {
+        pg.grabPixels();
+    } catch (InterruptedException e) {
+        throw new IllegalStateException("Error: Interrupted Waiting for Pixels");
+    }
+    if ((pg.getStatus() & ImageObserver.ABORT) != 0) {
+        throw new IllegalStateException("Error: Image Fetch Aborted");
+    }
+    return pixel;
+}
+}*/
