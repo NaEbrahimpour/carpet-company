@@ -314,3 +314,30 @@ static void dijkstra(int n,int w[][],LinkedList<Integer> setOfEdges){
 
 }
 
+
+/////////////////////////for odd numbers////////////////////
+else {
+            int k=0;
+            for(i=0 ; i< size ; i++){
+                    t=0;
+                    for(j=0 ; j< size ; j++){
+                        A11[i][j]=A[i][j];
+                        B11[i][j]=B[i][j];
+                    }
+                    for(j=size ; j<n ; j++){
+                        A12[i][t]=A[i][j];
+                        B12[i][t++]=B[i][j];
+                }
+            }
+            for(i=size ; i<n ; i++){
+                k=0;
+                for(j=0 ; j<size ; j++){
+                    A21[t][j]=A[i][j];
+                    B21[t][j]=B[i][j];
+                }
+                for(j=size ; j<n ; j++){
+                    A22[t][k]=A[i][j];
+                    B22[t][k++]=B[i][j];
+                }
+                t++;
+            }
