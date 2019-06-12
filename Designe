@@ -10,7 +10,7 @@ package com.company;
  *
  * @author ErfanN
  */
-public class Main {
+public class Strassen {
 
     /**
      * @param args the command line arguments
