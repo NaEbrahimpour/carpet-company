@@ -2,56 +2,62 @@ package com.company;
 import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
 import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
 import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 import javax.swing.*;
-public class Carpet_company {
+public class Main {
     public static void main(String args[]) throws IOException {
         File fileIn = new File("C:\\Users\\Mohammad Hossein\\Pictures\\flower.jpg");
-        int [][] pix = new int[400][400];
-        try
-        {
-            BufferedImage img= ImageIO.read(fileIn);
-            Raster raster=img.getData();
-            int w=raster.getWidth(),h=raster.getHeight();
-            int pixels[][]=new int[w][h];
-            for (int x=0;x<w;x++)
-            {
-                for(int y=0;y<h;y++)
-                {
-                    pixels[x][y]=raster.getSample(x,y,0);
-                }
-            }
-            /*System.out.println(w );
-            System.out.print(h );
-            int k=0,m=0;
-            for (int i=0;i<400;i++)
-            {
-                for(int j=0;j<400;j++)
-                {
-                    pix[i][j] = pixels[k][m];
-                    m++;
-                }
-                k++;
-            }*/
-            for (int x=0;x<w;x++)
-            {
-                for(int y=0;y<h;y++)
-                {
-                    System.out.print(pixels[x][y]+" ");
-                }
-                System.out.println();
-            }
+        BufferedImage img = ImageIO.read(fileIn);
+        //int [][] pix = new int[400][400];
+        //int [] pix = new int[w*h];
+       // System.out.println(img.getWidth()+" "+img.getHeight());
+         for (int x=0;x<img.getWidth();x++)
+         {
+             for(int y=0;y<img.getHeight();y++)
+             {
+                 System.out.print(convert_to_array_of_pixels(img)[x][y]+" ");
 
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+             }
+             System.out.println();
+         }
 
+       /* int k=0;
+        for (int x=0;x<w;x++)
+        {
+            for(int y=0;y<h;y++)
+            {
+                pix[k++] = pixels[x][y];
+
+            }
+        }*/
+
+        // getImageFromArray(pix , 50525,50525);
     }
+   /* public static Image getImageFromArray(int[] pixels, int width, int height) {
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        WritableRaster raster = (WritableRaster) image.getData();
+        raster.setPixels(0,0,width,height,pixels);
+        return image;
+    }*/
+   public static int [][] convert_to_array_of_pixels(BufferedImage img) throws IOException {
+
+
+       Raster raster = img.getData();
+       int w = raster.getWidth(), h = raster.getHeight();
+       int pixels[][] = new int[w][h];
+       for (int x = 0; x < w; x++) {
+           for (int y = 0; y < h; y++) {
+               pixels[x][y] = raster.getSample(x, y, 0);
+           }
+       }
+
+       return pixels;
+   }
+
 }
 
 
