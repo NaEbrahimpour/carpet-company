@@ -1,0 +1,58 @@
+
+package carpet_company;
+
+import java.util.Scanner;
+
+public class Coloring {
+     public static void main(String[] args) {
+         System.out.println("How many vetices");
+         Scanner sc = new Scanner(System.in);
+         int n = sc.nextInt();
+         
+         Integer w[][]=new Integer[n][n];
+         int vcolor[]=new int[n];
+       // int m = minColor(n,w,vcolor ); // Number of colors 
+        for(int j=0 ; j<n ; j++)
+             System.out.println(vcolor[j]);
+         System.out.println();
+     }
+    
+    static int minColor(int n , Integer w[][] , int vcolor[] ,String str ){
+    System.out.println("Enter neighbour regions");
+    java.util.Scanner in=new java.util.Scanner(System.in);
+    String input=str;
+    String input2[]=new String[n];
+    input2=input.split(",");
+    int i,j,k=0;
+    for(i=0 ; i<n ;i++)
+        for(j=0 ; j<n ; j++)
+            w[i][j]=0;        
+    for(i=0 ; i<input2.length/2 ; i++)        
+        w[Integer.parseInt(input2[k++])-1][Integer.parseInt(input2[k++])-1]=1;
+    ////finding min num of colors////
+    int color,t;
+    for(i=0 ; i<n ; i++)
+        vcolor[i]=0;
+    vcolor[0]=1;
+    for(i=1 ; i<n ; i++){
+        color=1;
+        for(j=0 ; j<i ; j++){
+            if(w[j][i]==1)
+                if(vcolor[j]==color)
+                {
+                    color++;
+                    for(t=0 ; t<i ; t++)
+                        if(w[t][i]==1)
+                            if(vcolor[t]==color)
+                                color++;
+               
+                }
+            vcolor[i]=color;      
+        }
+    }  
+    for(i=0 ; i<n ; i++)
+        if(vcolor[i] == 0) break;
+    return i-1;
+        
+}
+}   
